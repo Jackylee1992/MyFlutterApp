@@ -63,6 +63,10 @@ build/
 **/ios/ServiceDefinitions.json
 **/ios/Runner/GeneratedPluginRegistrant.*
 
+# my custom
+!**/ios/Flutter/AppFrameworkInfo.plist
+!**/ios/Runner/Info.plist
+
 # Exceptions to above rules.
 !**/ios/**/default.mode1v3
 !**/ios/**/default.mode2v3
