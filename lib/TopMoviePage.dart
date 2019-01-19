@@ -26,7 +26,10 @@ class TopMovieState extends State<TopMoviePage> {
       appBar: AppBar(
         title: Text(_title),
       ),
-      body: getBody(_movieItems),
+      body: RefreshIndicator(
+        child: getBody(_movieItems),
+        onRefresh: loadMovieData,
+      ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.local_activity),
         onPressed: () => loadMovieData(),
@@ -36,11 +39,13 @@ class TopMovieState extends State<TopMoviePage> {
 
   int _apiStartNum = 0;
 
-  loadMovieData() async {
+// https://api.douban.com/v2/movie/in_theaters
+// https://api.douban.com/v2/movie/top250?start=$_apiStartNum&count=15
+  Future<void> loadMovieData() async {
     try {
       http
           .get(
-              'https://api.douban.com/v2/movie/top250?start=$_apiStartNum&count=15')
+              'https://api.douban.com/v2/movie/in_theaters?start=0&count=10')
           .then((http.Response response) {
             JsonDecoder decoder = JsonDecoder();
             final result = decoder.convert(response.body);
