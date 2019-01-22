@@ -81,8 +81,8 @@ class MovieItemCell extends StatelessWidget {
                     padding: EdgeInsets.fromLTRB(0, 20, 10, 0),
                     child: Text(
                       (item['collect_count'] / 10000).toStringAsFixed(1) +
-                          '万人收藏',
-                      style: TextStyle(fontSize: 11),
+                          '万人看过',
+                      style: TextStyle(fontSize: 11, color: Colors.red),
                     ),
                   ),
                   Container(
