@@ -26,7 +26,7 @@ class _MyHomePageState extends State<MyHomePage> {
     showDialog(
         context: context,
         builder: (context) {
-          return AlertDialog(content: Text('请先登录'));
+          return AlertDialog(content: Text('暂未开发'));
         });
   }
 
