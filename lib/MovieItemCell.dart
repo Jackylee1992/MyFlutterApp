@@ -4,9 +4,11 @@ class MovieItemCell extends StatelessWidget {
   const MovieItemCell({
     Key key,
     this.item,
+    this.callback
   }) : super(key: key);
 
   final Map item;
+  final callback;
 
   String nameArrayString(List list) {
     List names = [];
@@ -100,7 +102,9 @@ class MovieItemCell extends StatelessWidget {
                           ),
                           // color: Colors.blue,
                           textColor: Colors.red,
-                          onPressed: () {},
+                          onPressed: () {
+                            callback(item);
+                          },
                         ),
                       ))
                 ],
