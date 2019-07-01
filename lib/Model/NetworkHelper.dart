@@ -35,7 +35,7 @@ Future<Map> loadMovieDataByDio() async {
   return result;
 }
 
-  Future<Map> loadMovieDataByHttp() async {
+  Future<void> loadMovieDataByHttp() async {
     try {
       http
           .get(

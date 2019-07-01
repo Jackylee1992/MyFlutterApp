@@ -31,7 +31,9 @@ class MovieItemCell extends StatelessWidget {
     String directors = nameArrayString(item['directors']);
     String casts = nameArrayString(item['casts']);
     double movieImageWidth = 90;
-    return Column(children: <Widget>[
+
+    return InkWell(
+      child: Column(children: <Widget>[
       Container(
         height: 150,
         width: screenWidth,
@@ -88,8 +90,7 @@ class MovieItemCell extends StatelessWidget {
                   Padding(
                     padding: EdgeInsets.fromLTRB(0, 20, 10, 0),
                     child: Text(
-                      (item['collect_count'] / 10000).toStringAsFixed(1) +
-                          '万人看过',
+                      (item['collect_count'] / 10000).toStringAsFixed(1) + '万人看过',
                       style: TextStyle(fontSize: 11, color: Colors.red),
                     ),
                   ),
@@ -121,6 +122,9 @@ class MovieItemCell extends StatelessWidget {
         height: 0.3,
         color: Colors.grey.withAlpha(150),
       )
-    ]);
+    ]),
+      onTap: (){
+        checkDetailCallback(item);
+      },);
   }
 }
