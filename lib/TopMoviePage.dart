@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'MovieItemCell.dart';
 import 'dart:async';
+import 'Model/NetworkHelper.dart';
 
 class TopMoviePage extends StatefulWidget {
   @override
@@ -66,29 +67,12 @@ void onClickBuyTicketButton(Map val) {
 // https://api.douban.com/v2/movie/in_theaters
 // https://api.douban.com/v2/movie/top250?start=$_apiStartNum&count=15
   Future<void> loadMovieData() async {
-    try {
-      http
-          .get(
-              'https://api.douban.com/v2/movie/in_theaters?start=0&count=10&apikey=$doubanApikey')
-          .then((http.Response response) {
-
-            JsonDecoder decoder = JsonDecoder();
-            final result = decoder.convert(response.body);
-            int code = result['code'];
-            if (code != 0) {
-              
-            }
-            setState(() {
-              _title = result['title'];
-              _movieItems = result['subjects'];
-              _apiStartNum += 10;
-            });
-          })
-          .catchError((error) => print('error' + error.toString()))
-          .whenComplete(() => print('complete'));
-    } catch (e) {
-      throw Exception(e.toString());
-    }
+    Map result = await HttpHelper().loadMovieDataByDio();
+    setState(() {
+      _title = result['title'];
+      _movieItems = result['subjects'];
+      _apiStartNum += 10;
+    });
   }
 
   String nameArrayString(List list) {
