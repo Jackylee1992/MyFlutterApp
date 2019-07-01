@@ -30,6 +30,7 @@ class MovieItemCell extends StatelessWidget {
     String imageURL = item['images']['small'];
     String directors = nameArrayString(item['directors']);
     String casts = nameArrayString(item['casts']);
+    double movieImageWidth = 90;
     return Column(children: <Widget>[
       Container(
         height: 150,
@@ -42,12 +43,12 @@ class MovieItemCell extends StatelessWidget {
               Padding(
                 child: Image(
                   image: NetworkImage(imageURL),
-                  width: 90,
+                  width: movieImageWidth,
                 ),
                 padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
               ),
               Container(
-                constraints: BoxConstraints.expand(width: (screenWidth * 0.45)),
+                constraints: BoxConstraints.expand(width: ((screenWidth - movieImageWidth) * 0.65)),
                 alignment: Alignment.topLeft,
                 // color: Colors.green,
                 child: Column(
