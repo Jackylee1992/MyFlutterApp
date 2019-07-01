@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
 
+// 声明 callback 类型，指明参数类型
+typedef void CheckMovieDetailAction(Map<String, dynamic> val);
+
 class MovieItemCell extends StatelessWidget {
   const MovieItemCell({
     Key key,
     this.item,
-    this.callback
+    @required this.checkDetailCallback,
+    this.buyTicketCallback,
   }) : super(key: key);
 
-  final Map item;
-  final callback;
+  final Map item; // 影片信息
+  final CheckMovieDetailAction checkDetailCallback; // 点击cell查看详情回调
+  final CheckMovieDetailAction buyTicketCallback; // 点击购票回调
 
   String nameArrayString(List list) {
     List names = [];
@@ -103,7 +108,7 @@ class MovieItemCell extends StatelessWidget {
                           // color: Colors.blue,
                           textColor: Colors.red,
                           onPressed: () {
-                            callback(item);
+                            buyTicketCallback(item); // 点击购票
                           },
                         ),
                       ))

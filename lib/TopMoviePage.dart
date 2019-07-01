@@ -21,14 +21,6 @@ class TopMovieState extends State<TopMoviePage> {
   var _title = '';
   var _movieItems = [];
 
-  void checkMovieDetails (movieID) {
-    showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(content: Text('查看详情，movieID:$movieID'));
-        });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,10 +38,26 @@ class TopMovieState extends State<TopMoviePage> {
     );
   }
 
-void onClickMovieCell(val) {
+/// action
+/// 
+/// 点击cell查看详情
+void onClickMovieCell(Map val) {
   String movieID = val['id'];
-  print('click on movie id = $movieID');
-  checkMovieDetails(movieID);
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(content: Text('查看详情，movieID:$movieID'));
+      });
+}
+
+/// 点击cell购票按钮
+void onClickBuyTicketButton(Map val) {
+  String movieID = val['id'];
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(content: Text('点击购票，movieID:$movieID'));
+      });
 }
 
   int _apiStartNum = 0;
@@ -93,7 +101,10 @@ void onClickMovieCell(val) {
   Widget getBody(List items) {
     List<Widget> itemViewList = [];
     for (var item in items) {
-      itemViewList.add(MovieItemCell(item: item, callback: (val) => onClickMovieCell(val),));
+      itemViewList.add(MovieItemCell(
+        item: item, 
+        checkDetailCallback: (val) => onClickMovieCell(val),
+        buyTicketCallback: (val) => onClickBuyTicketButton(val)));
     }
     return ListView(
       children: itemViewList,
